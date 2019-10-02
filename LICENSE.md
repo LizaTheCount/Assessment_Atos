@@ -1,2 +1,2 @@
 
-Copyright (C) 2019 Lizamisu
+Copyright (C) 2019 Liza de Graaf
