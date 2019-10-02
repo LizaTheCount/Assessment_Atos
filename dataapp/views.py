@@ -40,11 +40,12 @@ def database_upload(request):
                  'Europe': 1,
                  'Japan': 2}
 
-    # take item named FILES from request. Read and Decode (Decode becauce NO ASCII plz) said file.
+    # take item named FILES from request. Read and Decode said file (Decode because we don't want ASCII).
     csv_data = (request.FILES['csv_file']).read().decode("utf-8")
     lines = csv_data.split("\r\n")
 
     # new entries is a buffer for new upload objects
+    # if I don't have this it will take ages for the .csv file to process everything
     new_entries = []
     # loop through all the rows in the csv
     for line in lines:
@@ -65,6 +66,6 @@ def database_upload(request):
         ))
     # bulk_create is a django function that fill throw everything in the database all at once.
     Upload.objects.bulk_create(new_entries)
-    # HttpResponse will let the user know everything went oke and that no error has occured
+    # HttpResponse will let the user know everything went oke and that no error has occurred
     return HttpResponse('OK')
 
